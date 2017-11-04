@@ -22,14 +22,24 @@ services:
         # but if a service is unused, it's removed anyway
         exclude: '../../src/AppBundle/{Entity,Repository,Tests}'
 
-    # controllers are imported separately to make sure they're public
-    # and have a tag that allows actions to type-hint services
-    AppBundle\Controller\:
-        resource: '../../src/AppBundle/Controller'
-        public: true
-        tags: ['controller.service_arguments']
+    mapping:
+        class: AppBundle\Service\MappingService
 
-    # add more services, or override services that need manual wiring
-    # AppBundle\Service\ExampleService:
-    #     arguments:
-    #         $someArgument: 'some_value'
+    csv.reader.factory:
+        class: Port\Csv\CsvReaderFactory
+        arguments:
+            - 0
+
+    doctrine.writer.factory:
+        class: AppBundle\Service\DoctrineWriterFactory
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
+    workflow.organizer:
+        class: AppBundle\Service\WorkflowOrganizer
+        arguments:
+            - '@filter'
+            - '@converter'
+            - '@mapping'
+            - '@csv.reader.factory'
+            - '@doctrine.writer.factory'
