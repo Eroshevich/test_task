@@ -14,18 +14,18 @@ class ImportDataCommand extends ContainerAwareCommand
 
         $this
             // the name of the command (the part after "bin/console")
-            ->setName('app:import_data')
+            ->setName('app:import_csv')
             ->setDescription('Import data to database.')
             ->setHelp('This command allows you to import a required data to database')
-            ->addArgument('filename', InputArgument::REQUIRED, 'The filename is: ');
+            ->addArgument('filename', InputArgument::REQUIRED, 'Enter a filename: ');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 
         $output->writeln([
-            'Import Data',
-            '============',
+            'Import CSV files',
+            '=================',
             '',
         ]);
 
@@ -34,15 +34,15 @@ class ImportDataCommand extends ContainerAwareCommand
         {
             $filename = $input->getArgument('filename');
             $workflowOrganizer = $this->getContainer()->get('workflow.organizer');
-            $result = $workflowOrganizer->processCSVFile(new \SplFileObject($filename), $test = $input->getOption('test'));
+            $result = $workflowOrganizer->processCSVFile(new \SplFileObject($filename));
             $output->writeln('Filename: ' . $input->getArgument('filename'));
 
-            $output->write('Files were successful: ' .
-                ($result['result']->getTotalProcessedCount() - count($result['failedItems'])));
-            $output->write('Files were processed: ' . $result['result']->getTotalProcessedCount());
-            $output->write('Files were failed: ' . count($result['failedItems']));
-            $output->write('Files were skipped: ');
-            foreach ($result['failedItems'] as $item) {
+            $output->write('Records were successful: ' .
+                ($result['result']->getTotalProcessedCount() - count($result['failedOne'])));
+            $output->write('Records were processed: ' . $result['result']->getTotalProcessedCount());
+            $output->write('Records were failed: ' . count($result['failedOne']));
+            $output->write('Records were skipped: ');
+            foreach ($result['failedOne'] as $item) {
                 $output->writeln($item['productCode']);
             }
 

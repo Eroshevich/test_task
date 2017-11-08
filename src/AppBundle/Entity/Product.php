@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
@@ -45,6 +46,7 @@ class Product
 
     /**
      * @ORM\Column(name="dtmAdded", type="datetime", nullable=true)
+     * @Gedmo\Timestampable(on="update")
      */
     private $dateTimeAdded;
 
