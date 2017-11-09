@@ -14,28 +14,39 @@ use AppBundle\Entity\Product;
 class WorkflowOrganizer
 {
     /**
-     * @param CsvReader $reader
-     *
-     * @return Workflow
+     * @var ImportRuleService
      */
-    private function createWorkflow($reader)
-    {
-        $workflow = new Workflow($reader);
-        $workflow->addStep($this->mappingStep->inspireMapping());
-        $workflow->addStep($this->filterStep->inspireFilter());
-        $workflow->addStep($this->converterStep->inspireConvert());
+    private $filterStep;
 
-        return $workflow;
-    }
+    /**
+     * @var MappingService
+     */
+    private $mappingStep;
+
+    /**
+     * @var ValueConverterService
+     */
+    private $converterStep;
+
+    /**
+     * @var CsvReaderFactory
+     */
+    private $csvReaderFactory;
+
+    /**
+     * @var DoctrineWriterFactory
+     */
+    private $doctrineWriterFactory;
+
 
     /**
      * WorkflowOrganizer constructor.
      *
-     * @param ImportRuleService       $filterStep
-     * @param ValueConverterService   $converterStep
-     * @param MappingService          $mappingStep
-     * @param CsvReaderFactory        $csvReaderFactory
-     * @param DoctrineWriterFactory   $doctrineWriterFactory
+     * @param ImportRuleService      $filterStep
+     * @param ValueConverterService  $converterStep
+     * @param MappingService         $mappingStep
+     * @param CsvReaderFactory       $csvReaderFactory
+     * @param DoctrineWriterFactory  $doctrineWriterFactory
      */
     public function __construct(
         ImportRuleService $filterStep,
@@ -52,52 +63,31 @@ class WorkflowOrganizer
     }
 
     /**
-     * @var ImportRuleService
+     * @param CsvReader $reader
+     *
+     * @return Workflow
      */
-    private $filterStep;
+    private function createWorkflow($reader)
+    {
+        $workflow = new Workflow($reader);
+        $workflow->addStep($this->mappingStep->inspireMapping());
+        $workflow->addStep($this->filterStep->inspireFilter());
+        $workflow->addStep($this->converterStep->inspireConvert());
+
+        return $workflow;
+    }
 
     /**
-     * @var ValueConverterService
-     */
-    private $converterStep;
-
-    /**
-     * @var MappingService
-     */
-    private $mappingStep;
-
-    /**
-     * @var CsvReaderFactory
-     */
-    private $csvReaderFactory;
-
-    /**
-     * @var DoctrineWriterFactory
-     */
-    private $doctrineWriterFactory;
-
-    /**
-     * @var
-     */
-    private $workflow;
-
-    /**
-     * @param \SplFileObject $filename
-     * @param bool    $test
+     * @param \SplFileObject $fileObject
+     * @param bool   $test
      *
      * @return array
      */
-    public function processCSVFile(\SplFileObject $fileObject, $test)
+    public function processCSVFile(\SplFileObject $fileObject)
     {
         $this->workflow = $this->createWorkflow($this->csvReaderFactory->getReader($fileObject));
 
-        if (!$test) {
-            $this->workflow->addWriter($this->inspireDoctrineWriter());
-        }
-
-        return [
-            'result' => $this->workflow->process(), 'failedOne' => $this->filterStep->getFailedOne()
-        ];
+        return ['result' => $this->workflow->process(), 'failedOne' => $this->filterStep->getFailedOne()];
     }
 
     /**

@@ -33,7 +33,7 @@ class ValueConverterService
      */
     private function updateDiscontinuedValue($input)
     {
-        $input['DateTimeDiscontinued'] == 'yes' ? new DateTime() : null;
+        $input['dateTimeDiscontinued'] == 'yes' ? new DateTime() : null;
         
         return $input;
     }

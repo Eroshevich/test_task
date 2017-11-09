@@ -62,9 +62,9 @@ class ImportRuleService
      */
     private function FinishInput($input)
     {
-        if ($this->isValidCost($input['Cost'])
-            && $this->isValidStock($input['Stock'])
-            && $this->isValidDiscontinued($input['DateTimeDiscontinued'])
+        if ($this->isValidCost($input['cost'])
+            && $this->isValidStock($input['stock'])
+            && $this->isValidDiscontinued($input['dateTimeDiscontinued'])
         ) {
            
             return true;

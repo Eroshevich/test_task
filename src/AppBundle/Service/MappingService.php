@@ -15,18 +15,16 @@ class MappingService
      */
     public function inspireMapping()
     {
-        $workflow = new MappingStep();
+        $mappingStep = new MappingStep();
 
-        $workflow->map('[Product Code]', '[ProductCode]');
-        $workflow->map('[Product Name]', '[Name]');
-        $workflow->map('[Product Description]', '[Description]');
-        $workflow->map('[Stock]', '[Stock]');
-        $workflow->map('[Cost in GBP]', '[Cost]');
-        $workflow->map('[Discontinued]', '[DateTimeDiscontinued]');
+        $mappingStep->map('[Product Code]', '[productCode]');
+        $mappingStep->map('[Product Name]', '[name]');
+        $mappingStep->map('[Product Description]', '[description]');
+        $mappingStep->map('[Stock]', '[stock]');
+        $mappingStep->map('[Cost in GBP]', '[cost]');
+        $mappingStep->map('[Discontinued]', '[dateTimeDiscontinued]');
 
-        $workflow->process();
-
-        return $workflow;
+        return $mappingStep;
     }
 }
 
