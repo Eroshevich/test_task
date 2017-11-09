@@ -11,9 +11,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Product
 {
-
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="intProductDataId", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -30,12 +29,12 @@ class Product
     private $description;
 
     /**
-     * @ORM\Column(name="intProductStock", type="integer", length=50, nullable=false)
+     * @ORM\Column(name="intProductStock", type="integer", nullable=false)
      */
     private $stock;
 
     /**
-     * @ORM\Column(name="numProductCost", type="decimal", length=50, nullable=false)
+     * @ORM\Column(name="numProductCost", type="decimal", nullable=false)
      */
     private $cost;
 
@@ -51,17 +50,14 @@ class Product
     private $dateTimeAdded;
 
     /**
-     * @ORM\Column(name="dtmDiscounted", type="datetime", nullable=true)
+     * @ORM\Column(name="dtmDiscontinued", type="datetime", nullable=true)
      */
     private $dateTimeDiscontinued;
 
     /**
-     * @ORM\Column(name="stmTimestamp", type="integer", nullable=false)
-     */
-    private $timestamp;
-
-    /**
-     * @return mixed
+     * Get id
+     *
+     * @return integer
      */
     public function getId()
     {
@@ -69,25 +65,11 @@ class Product
     }
 
     /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param mixed $name
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Product
      */
     public function setName($name)
     {
@@ -97,15 +79,21 @@ class Product
     }
 
     /**
-     * @return mixed
+     * Get name
+     *
+     * @return string
      */
-    public function getDescription()
+    public function getName()
     {
-        return $this->description;
+        return $this->name;
     }
 
     /**
-     * @param mixed $description
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Product
      */
     public function setDescription($description)
     {
@@ -115,51 +103,21 @@ class Product
     }
 
     /**
-     * @return mixed
+     * Get description
+     *
+     * @return string
      */
-    public function getStock()
+    public function getDescription()
     {
-        return $this->stock;
+        return $this->description;
     }
 
     /**
-     * @param mixed $stock
-     */
-    public function setStock($stock)
-    {
-        $this->stock = $stock;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * @param mixed $price
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getProductCode()
-    {
-        return $this->productCode;
-    }
-
-    /**
-     * @param mixed $productCode
+     * Set productCode
+     *
+     * @param string $productCode
+     *
+     * @return Product
      */
     public function setProductCode($productCode)
     {
@@ -169,15 +127,69 @@ class Product
     }
 
     /**
-     * @return mixed
+     * Get productCode
+     *
+     * @return string
      */
-    public function getDateTimeAdded()
+    public function getProductCode()
     {
-        return $this->dateTimeAdded;
+        return $this->productCode;
     }
 
     /**
-     * @param mixed $dateTimeAdded
+     * Set stock
+     *
+     * @param integer $stock
+     *
+     * @return Product
+     */
+    public function setStock($stock)
+    {
+        $this->stock = $stock;
+
+        return $this;
+    }
+
+    /**
+     * Get stock
+     *
+     * @return integer
+     */
+    public function getStock()
+    {
+        return $this->stock;
+    }
+
+    /**
+     * Set cost
+     *
+     * @param string $cost
+     *
+     * @return Product
+     */
+    public function setPrice($cost)
+    {
+        $this->cost = $cost;
+
+        return $this;
+    }
+
+    /**
+     * Get cost
+     *
+     * @return string
+     */
+    public function getCost()
+    {
+        return $this->cost;
+    }
+
+    /**
+     * Set dateTimeAdded
+     *
+     * @param \DateTime $dateTimeAdded
+     *
+     * @return Product
      */
     public function setDateTimeAdded($dateTimeAdded)
     {
@@ -187,39 +199,35 @@ class Product
     }
 
     /**
-     * @return mixed
+     * Get dateTimeAdded
+     *
+     * @return \DateTime
+     */
+    public function getDateTimeAdded()
+    {
+        return $this->dateTimeAdded;
+    }
+
+    /**
+     * Set dateTimeDiscontinued
+     *
+     * @param \DateTime $dateTimeDiscontinued
+     *
+     * @return Product
+     */
+    public function setDateTimeDiscontinued($dateTimeDiscontinued)
+    {
+        $this->dateTimeDiscontinued = $dateTimeDiscontinued;
+        return $this;
+    }
+
+    /**
+     * Get dateTimeDiscontinued
+     *
+     * @return \DateTime
      */
     public function getDateTimeDiscontinued()
     {
         return $this->dateTimeDiscontinued;
     }
-
-    /**
-     * @param mixed $dateTimeDiscontinued
-     */
-    public function setDateTimeDiscontinued($dateTimeDiscontinued)
-    {
-        $this->dateTimeDiscontinued = $dateTimeDiscontinued;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTimestamp()
-    {
-        return $this->timestamp;
-    }
-
-    /**
-     * @param mixed $timestamp
-     */
-    public function setTimestamp($timestamp)
-    {
-        $this->timestamp = $timestamp;
-
-        return $this;
-    }
-
 }
