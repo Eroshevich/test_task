@@ -38,6 +38,11 @@ class WorkflowOrganizer
      */
     private $doctrineWriterFactory;
 
+    /**
+     * @var
+     */
+    private $workflow;
+
 
     /**
      * WorkflowOrganizer constructor.
@@ -70,9 +75,9 @@ class WorkflowOrganizer
     private function createWorkflow($reader)
     {
         $workflow = new Workflow($reader);
-        $workflow->addStep($this->mappingStep->inspireMapping());
-        $workflow->addStep($this->filterStep->inspireFilter());
-        $workflow->addStep($this->converterStep->inspireConvert());
+        $workflow->addStep($this->mappingStep->generateMapping());
+        $workflow->addStep($this->filterStep->generateFilter());
+        $workflow->addStep($this->converterStep->generateConvert());
 
         return $workflow;
     }
@@ -83,9 +88,12 @@ class WorkflowOrganizer
      *
      * @return array
      */
-    public function processCSVFile(\SplFileObject $fileObject)
+    public function processCSVFile(\SplFileObject $fileObject, $test)
     {
         $this->workflow = $this->createWorkflow($this->csvReaderFactory->getReader($fileObject));
+        if (!$test) {
+            $this->workflow->addWriter($this->generateDoctrineWriter());
+        }
 
         return ['result' => $this->workflow->process(), 'failedOne' => $this->filterStep->getFailedOne()];
     }
@@ -93,7 +101,7 @@ class WorkflowOrganizer
     /**
      * @return \Port\Doctrine\DoctrineWriter
      */
-    private function inspireDoctrineWriter()
+    private function generateDoctrineWriter()
     {
         $writer = $this->doctrineWriterFactory->getDoctrineWriter(Product::class);
         $writer->prepare();

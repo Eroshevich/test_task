@@ -2,39 +2,32 @@
 
 namespace AppBundle\Service;
 
-use Port\Steps\Step\ConverterStep;
-use Port\Steps\Step;
 use DateTime;
-
+use Port\Steps\Step\ConverterStep;
 /**
- * Class ValueConverterService
+ * Class ConverterService
  * @package AppBundle\Service
  */
-class ValueConverterService
+class  ValueConverterService
 {
     /**
      * @return ConverterStep
      */
-    public function inspireConvert()
+    public function generateConvert()
     {
         $convertStep = new ConverterStep();
-        $convertStep->add(function($input) 
-        { 
-            return $this->updateDiscontinuedValue($input); 
-        });
-        
+        $convertStep->add(function($input) { return $this->updateDiscontinuedValue($input); });
         return $convertStep;
     }
-
-/**
+    
+    /**
      * @param $input
      *
      * @return mixed
      */
     private function updateDiscontinuedValue($input)
     {
-        $input['dateTimeDiscontinued'] == 'yes' ? new DateTime() : null;
-        
+        $input['dateTimeDiscontinued'] = $input['dateTimeDiscontinued'] == 'yes' ? new DateTime() : null;
         return $input;
     }
 }

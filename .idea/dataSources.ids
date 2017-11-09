@@ -28,7 +28,6 @@
         <data-type>int(11)</data-type>
       </column>
       <column id="8" parent="2" name="numProductCost">
-        <mandatory>1</mandatory>
         <data-type>decimal(10)</data-type>
       </column>
       <column id="9" parent="2" name="strProductCode">
@@ -38,7 +37,7 @@
       <column id="10" parent="2" name="dtmAdded">
         <data-type>datetime</data-type>
       </column>
-      <column id="11" parent="2" name="dtmDiscounted">
+      <column id="11" parent="2" name="dtmDiscontinued">
         <data-type>datetime</data-type>
       </column>
       <column id="12" parent="2" name="stmTimestamp">

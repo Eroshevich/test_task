@@ -13,15 +13,28 @@ class ImportRuleService
 {
 
     /**
+     * @var array
+     */
+    private $failedOne = [];
+
+    /**
+     * @return array
+     */
+    public function getFailedOne()
+    {
+        return $this->failedOne;
+    }
+
+    /**
      * @return FilterStep
      */
-    public function inspireFilter()
+    public function generateFilter()
     {
         $filter = new FilterStep();
         
         return $filter->add(function ($input) {
             
-            return $this->FinishInput($input);
+            return $this->isValidInput($input);
         });
     }
 
@@ -60,7 +73,7 @@ class ImportRuleService
      *
      * @return bool
      */
-    private function FinishInput($input)
+    private function isValidInput($input)
     {
         if ($this->isValidCost($input['cost'])
             && $this->isValidStock($input['stock'])
@@ -73,18 +86,5 @@ class ImportRuleService
             
             return false;
         }
-    }
-
-    /**
-     * @var array
-     */
-    private $failedOne = [];
-
-    /**
-     * @return array
-     */
-    public function getFailedOne()
-    {
-        return $this->failedOne;
     }
 }

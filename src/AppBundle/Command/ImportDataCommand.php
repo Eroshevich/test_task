@@ -15,7 +15,6 @@ class ImportDataCommand extends ContainerAwareCommand
     {
 
         $this
-            // the name of the command (the part after "bin/console")
             ->setName('app:import_csv')
             ->setDescription('Import data to database.')
             ->setHelp('This command allows you to import a required data to database')
@@ -43,19 +42,18 @@ class ImportDataCommand extends ContainerAwareCommand
         {
             $filename = $input->getArgument('filename');
             $workflowOrganizer = $this->getContainer()->get('workflow.organizer');
-            $result = $workflowOrganizer->processCSVFile(new \SplFileObject($filename));
+            $result = $workflowOrganizer->processCSVFile(new \SplFileObject($filename), $test = $input->getOption('test'));
 
-            $output->writeln('Records were processed: ' . $result['result']->getTotalProcessedCount());
-            $output->writeln('Records were successful: ' .
-                ($result['result']->getTotalProcessedCount() - count($result['failedOne'])));
-            $output->writeln('Records were failed: ' . count($result['failedOne']));
+            $output->writeln('Records successfully imported!');
             $output->writeln('Records were skipped: ');
             foreach ($result['failedOne'] as $item) {
                 $output->writeln($item['productCode']);
             }
-
-            $output->writeln('Records successfully imported!');
-
+            $output->writeln('Records were processed: ' .
+                ($result['result']->getTotalProcessedCount() + count($result['failedOne'])));
+            $output->writeln('Records were successful: ' . $result['result']->getTotalProcessedCount());
+            $output->writeln('Records were failed: ' . count($result['failedOne']));
+            
         }
     }
 }

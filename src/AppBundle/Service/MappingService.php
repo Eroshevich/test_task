@@ -13,7 +13,7 @@ class MappingService
     /**
      * @return MappingStep
      */
-    public function inspireMapping()
+    public function generateMapping()
     {
         $mappingStep = new MappingStep();
 
