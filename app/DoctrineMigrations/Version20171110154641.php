@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20171109121752 extends AbstractMigration
+class Version20171110154641 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -18,8 +18,8 @@ class Version20171109121752 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP INDEX strProductCode ON tblProductData');
-        $this->addSql('ALTER TABLE tblProductData CHANGE intProductDataId intProductDataId INT AUTO_INCREMENT NOT NULL, CHANGE dtmAdded dtmAdded DATETIME NOT NULL, CHANGE dtmDiscontinued dtmDiscontinued DATETIME NOT NULL, CHANGE stmTimestamp stmTimestamp DATETIME NOT NULL');
+        $this->addSql('DROP INDEX tblProductData_strProductCode_uindex ON tblProductData');
+        $this->addSql('ALTER TABLE tblProductData ADD intProductStock INT NOT NULL, ADD numProductCost NUMERIC(10, 0) NOT NULL');
 
     }
 
@@ -31,8 +31,8 @@ class Version20171109121752 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE tblProductData CHANGE intProductDataId intProductDataId INT UNSIGNED AUTO_INCREMENT NOT NULL, CHANGE dtmAdded dtmAdded DATETIME DEFAULT NULL, CHANGE dtmDiscontinued dtmDiscontinued DATETIME DEFAULT NULL, CHANGE stmTimestamp stmTimestamp DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL');
-        $this->addSql('CREATE UNIQUE INDEX strProductCode ON tblProductData (strProductCode)');
+        $this->addSql('ALTER TABLE tblProductData DROP intProductStock, DROP numProductCost');
+        $this->addSql('CREATE UNIQUE INDEX tblProductData_strProductCode_uindex ON tblProductData (strProductCode)');
 
     }
 }
