@@ -3,8 +3,6 @@
 namespace AppBundle\Service;
 
 use Port\Steps\Step\FilterStep;
-use Port\Steps\StepAggregator as Workflow;
-
 /**
  * Class ImportRuleService
  * @package AppBundle\Service

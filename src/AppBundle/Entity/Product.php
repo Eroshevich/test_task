@@ -74,7 +74,6 @@ class Product
     public function setName($name)
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -98,7 +97,6 @@ class Product
     public function setDescription($description)
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -122,7 +120,6 @@ class Product
     public function setProductCode($productCode)
     {
         $this->productCode = $productCode;
-
         return $this;
     }
 
@@ -137,54 +134,6 @@ class Product
     }
 
     /**
-     * Set stock
-     *
-     * @param integer $stock
-     *
-     * @return Product
-     */
-    public function setStock($stock)
-    {
-        $this->stock = $stock;
-
-        return $this;
-    }
-
-    /**
-     * Get stock
-     *
-     * @return integer
-     */
-    public function getStock()
-    {
-        return $this->stock;
-    }
-
-    /**
-     * Set cost
-     *
-     * @param string $cost
-     *
-     * @return Product
-     */
-    public function setPrice($cost)
-    {
-        $this->cost = $cost;
-
-        return $this;
-    }
-
-    /**
-     * Get cost
-     *
-     * @return string
-     */
-    public function getCost()
-    {
-        return $this->cost;
-    }
-
-    /**
      * Set dateTimeAdded
      *
      * @param \DateTime $dateTimeAdded
@@ -194,7 +143,6 @@ class Product
     public function setDateTimeAdded($dateTimeAdded)
     {
         $this->dateTimeAdded = $dateTimeAdded;
-
         return $this;
     }
 
@@ -229,5 +177,51 @@ class Product
     public function getDateTimeDiscontinued()
     {
         return $this->dateTimeDiscontinued;
+    }
+
+    /**
+     * Set stock
+     *
+     * @param integer $stock
+     *
+     * @return Product
+     */
+    public function setStock($stock)
+    {
+        $this->stock = $stock;
+        return $this;
+    }
+
+    /**
+     * Get stock
+     *
+     * @return integer
+     */
+    public function getStock()
+    {
+        return $this->stock;
+    }
+
+    /**
+     * Set cost
+     *
+     * @param string $cost
+     *
+     * @return Product
+     */
+    public function setCost($cost)
+    {
+        $this->cost = $cost;
+        return $this;
+    }
+
+    /**
+     * Get cost
+     *
+     * @return string
+     */
+    public function getCost()
+    {
+        return $this->cost;
     }
 }
