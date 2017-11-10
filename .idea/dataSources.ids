@@ -8,63 +8,53 @@
     <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
     <database-model serializer="dbm" rdbms="MYSQL" format-version="2.5">
       <schema id="1" name="importTest"/>
-      <table id="2" parent="1" name="tblProductData"/>
-      <table id="3" parent="1" name="migration_versions"/>
-      <column id="4" parent="2" name="id">
-        <mandatory>1</mandatory>
-        <data-type>int(11)</data-type>
-        <sequence-identity>1</sequence-identity>
-      </column>
-      <column id="5" parent="2" name="strProductName">
-        <mandatory>1</mandatory>
-        <data-type>varchar(50)</data-type>
-      </column>
-      <column id="6" parent="2" name="strProductDesc">
+      <table id="2" parent="1" name="migration_versions"/>
+      <table id="3" parent="1" name="tblProductData">
+        <comment>Stores product data</comment>
+      </table>
+      <column id="4" parent="2" name="version">
         <mandatory>1</mandatory>
         <data-type>varchar(255)</data-type>
       </column>
-      <column id="7" parent="2" name="intProductStock">
+      <key id="5" parent="2" name="PRIMARY">
+        <columns>version</columns>
+        <primary>1</primary>
+      </key>
+      <column id="6" parent="3" name="intProductDataId">
         <mandatory>1</mandatory>
-        <data-type>int(11)</data-type>
+        <data-type>int(10)</data-type>
+        <sequence-identity>1</sequence-identity>
       </column>
-      <column id="8" parent="2" name="numProductCost">
-        <data-type>decimal(10)</data-type>
+      <column id="7" parent="3" name="strProductName">
+        <mandatory>1</mandatory>
+        <data-type>varchar(50)</data-type>
       </column>
-      <column id="9" parent="2" name="strProductCode">
+      <column id="8" parent="3" name="strProductDesc">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="9" parent="3" name="strProductCode">
         <mandatory>1</mandatory>
         <data-type>varchar(10)</data-type>
       </column>
-      <column id="10" parent="2" name="dtmAdded">
+      <column id="10" parent="3" name="dtmAdded">
         <data-type>datetime</data-type>
       </column>
-      <column id="11" parent="2" name="dtmDiscontinued">
+      <column id="11" parent="3" name="dtmDiscontinued">
         <data-type>datetime</data-type>
       </column>
-      <column id="12" parent="2" name="stmTimestamp">
-        <mandatory>1</mandatory>
-        <data-type>timestamp</data-type>
-        <default-expression>&apos;CURRENT_TIMESTAMP&apos;</default-expression>
-      </column>
-      <index id="13" parent="2" name="tblProductData_strProductCode_uindex">
+      <index id="12" parent="3" name="tblProductData_strProductCode_uindex">
         <columns>strProductCode</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <key id="14" parent="2" name="PRIMARY">
-        <columns>id</columns>
+      <key id="13" parent="3" name="PRIMARY">
+        <columns>intProductDataId</columns>
         <primary>1</primary>
       </key>
-      <key id="15" parent="2" name="tblProductData_strProductCode_uindex">
+      <key id="14" parent="3" name="tblProductData_strProductCode_uindex">
         <columns>strProductCode</columns>
         <underlying-index>tblProductData_strProductCode_uindex</underlying-index>
-      </key>
-      <column id="16" parent="3" name="version">
-        <mandatory>1</mandatory>
-        <data-type>varchar(255)</data-type>
-      </column>
-      <key id="17" parent="3" name="PRIMARY">
-        <columns>version</columns>
-        <primary>1</primary>
       </key>
     </database-model>
   </data-source>
