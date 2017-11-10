@@ -46,13 +46,13 @@ class ImportDataCommand extends ContainerAwareCommand
 
             $output->writeln('Records successfully imported!');
             $output->writeln('Records were skipped: ');
-            foreach ($result['failedOne'] as $item) {
+            foreach ($result['failedItem'] as $item) {
                 $output->writeln($item['productCode']);
             }
             $output->writeln('Records were processed: ' .
-                ($result['result']->getTotalProcessedCount() + count($result['failedOne'])));
+                ($result['result']->getTotalProcessedCount() + count($result['failedItem'])));
             $output->writeln('Records were successful: ' . $result['result']->getTotalProcessedCount());
-            $output->writeln('Records were failed: ' . count($result['failedOne']));
+            $output->writeln('Records were failed: ' . count($result['failedItem']));
             
         }
     }

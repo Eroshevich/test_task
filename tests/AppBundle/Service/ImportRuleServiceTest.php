@@ -28,7 +28,7 @@ class ImportRuleServiceTest extends TestCase
         $factoryMock = new FactoryMock();
         $this->workflowOrganizer = $factoryMock->createWorkflowOrganizer($data);
         $this->assertEquals($data['count'], count($this->workflowOrganizer->
-        processCSVFile(new \SplFileObject('php://memory'), true)['failedOne']));
+        processCSVFile(new \SplFileObject('php://memory'), true)['failedItem']));
     }
 
     /**

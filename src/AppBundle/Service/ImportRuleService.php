@@ -15,14 +15,14 @@ class ImportRuleService
     /**
      * @var array
      */
-    private $failedOne = [];
+    private $failedItem = [];
 
     /**
      * @return array
      */
-    public function getFailedOne()
+    public function getFailedItem()
     {
-        return $this->failedOne;
+        return $this->failedItem;
     }
 
     /**
@@ -82,7 +82,7 @@ class ImportRuleService
            
             return true;
         } else {
-            $this->failedOne[] = $input;
+            $this->failedItem[] = $input;
             
             return false;
         }

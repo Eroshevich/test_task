@@ -95,7 +95,7 @@ class WorkflowOrganizer
             $this->workflow->addWriter($this->generateDoctrineWriter());
         }
 
-        return ['result' => $this->workflow->process(), 'failedOne' => $this->filterStep->getFailedOne()];
+        return ['result' => $this->workflow->process(), 'failedItem' => $this->filterStep->getFailedItem()];
     }
 
     /**
