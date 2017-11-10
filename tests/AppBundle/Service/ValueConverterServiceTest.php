@@ -20,6 +20,8 @@ class ValueConverterServiceTest extends TestCase
 
     /**
      * @param $data
+     * 
+     * @dataProvider dataProvide
      */
     public function testValueConverterService($data)
     {
@@ -34,23 +36,36 @@ class ValueConverterServiceTest extends TestCase
         }
     }
 
-    public function testAClassUsingObjectFactory()
+    /**
+     * @return array
+     */
+    public function dataProvide()
     {
-        $fooStub = $this->getMock('Foo');
-        $barStub = $this->getMock('Bar');
-
-        $factoryMock = $this->getMock('Factory');
-
-        $factoryMock->expects($this->any())
-            ->method('getInstanceFor')
-            ->with('foo')
-            ->will($this->returnValue($fooStub));
-
-        $factoryMock->expects($this->any())
-            ->method('getInstanceFor')
-            ->with('bar')
-            ->will($this->returnValue($barStub));
+        return [
+            1 => [['row' => [
+                'Product Name' => 'CPU',
+                'Product Description' => 'Processing power',
+                'Stock' => 10,
+                'Cost in GBP' => 15,
+                'Product Code' => 'P0017',
+                'Discontinued' => 'yes'
+            ], 'isDateTime' => true]],
+            2 => [['row' => [
+                'Product Name' => 'CPU',
+                'Product Description' => 'Processing power',
+                'Stock' => 10,
+                'Cost in GBP' => 4,
+                'Product Code' => 'P0017',
+                'Discontinued' => ''
+            ], 'isDateTime' => false]],
+            3 => [['row' => [
+                'Product Name' => 'CPU',
+                'Product Description' => 'Processing power',
+                'Stock' => 10,
+                'Cost in GBP' => 10,
+                'Product Code' => 'P0017',
+                'Discontinued' => ''
+            ], 'isDateTime' => false]],
+        ];
     }
-
-
 }
