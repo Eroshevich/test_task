@@ -3,7 +3,7 @@
 namespace tests\AppBundle\Service;
 
 use PHPUnit\Framework\TestCase;
-use AppBundle\Service\FactoryMock;
+use tests\AppBundle\Service\FactoryMock;
 
 class ValueConverterServiceTest extends TestCase
 {

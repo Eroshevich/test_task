@@ -2,7 +2,7 @@
 
 namespace tests\AppBundle\Service;
 
-use AppBundle\Service\FactoryMock;
+use tests\AppBundle\Service\FactoryMock;
 use PHPUnit\Framework\TestCase;
 
 class ImportRuleServiceTest extends TestCase
@@ -11,7 +11,6 @@ class ImportRuleServiceTest extends TestCase
      * @var
      */
     protected $workflowOrganizer;
-
 
     /**
      * @var
