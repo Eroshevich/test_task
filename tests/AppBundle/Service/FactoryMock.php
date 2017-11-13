@@ -1,23 +1,27 @@
 <?php
 
-namespace AppBundle\Service;
+namespace tests\AppBundle\Service;
 
 use PHPUnit\Framework\TestCase;
 use Port\Csv\CsvReader;
 use Port\Csv\CsvReaderFactory;
 use Port\Doctrine\DoctrineWriter;
+use AppBundle\Service\ImportRuleService;
+use AppBundle\Service\ValueConverterService;
+use AppBundle\Service\MappingService;
+use AppBundle\Service\WorkflowOrganizer;
 
 class FactoryMock extends TestCase
 {
-    protected $csvReaderFactory;
-    protected $doctrineWriterFactory;
     protected $importRuleService;
     protected $valueConverterService;
     protected $mappingService;
     protected $workflowOrganizer;
     protected $fileObject;
     protected $csvReader;
+    protected $csvReaderFactory;
     protected $doctrineWriter;
+    protected $doctrineWriterFactory;
     protected $splFile;
     protected $savedItem;
 
