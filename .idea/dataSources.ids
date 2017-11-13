@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - importTest@localhost" uuid="ef9b6335-e9cb-4089-8b49-e0915f5d01f1">
+    <database-info product="MySQL" version="5.7.20-0ubuntu0.16.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.44 ( Revision: b3cda4f864902ffdde495b9df93937c3e20009be )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.5">
+      <schema id="1" name="importTest"/>
+      <table id="2" parent="1" name="migration_versions"/>
+      <table id="3" parent="1" name="tblProductData">
+        <comment>Stores product data</comment>
+      </table>
+      <column id="4" parent="2" name="version">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <key id="5" parent="2" name="PRIMARY">
+        <columns>version</columns>
+        <primary>1</primary>
+      </key>
+      <column id="6" parent="3" name="intProductDataId">
+        <mandatory>1</mandatory>
+        <data-type>int(10)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="7" parent="3" name="strProductName">
+        <mandatory>1</mandatory>
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="8" parent="3" name="strProductDesc">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="9" parent="3" name="strProductCode">
+        <mandatory>1</mandatory>
+        <data-type>varchar(10)</data-type>
+      </column>
+      <column id="10" parent="3" name="dtmAdded">
+        <data-type>datetime</data-type>
+      </column>
+      <column id="11" parent="3" name="dtmDiscontinued">
+        <data-type>datetime</data-type>
+      </column>
+      <index id="12" parent="3" name="tblProductData_strProductCode_uindex">
+        <columns>strProductCode</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="13" parent="3" name="PRIMARY">
+        <columns>intProductDataId</columns>
+        <primary>1</primary>
+      </key>
+      <key id="14" parent="3" name="tblProductData_strProductCode_uindex">
+        <columns>strProductCode</columns>
+        <underlying-index>tblProductData_strProductCode_uindex</underlying-index>
+      </key>
+    </database-model>
+  </data-source>
+</component>
