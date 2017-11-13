@@ -1,7 +1,1 @@
-vendor
-cache
-var/cache/dev/doctrine/
-var/cache/dev/pools/protJGVke2/
-web/bundles/
 .idea
-app/config/parameters.yml

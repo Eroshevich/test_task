@@ -1,0 +1,7 @@
+foo_bundle:
+    resource: "@FooBundle/Service"
+    type: annotation
+
+action_arguments_bundle:
+    resource: "@ActionArgumentsBundle/Service"
+    type: annotation
