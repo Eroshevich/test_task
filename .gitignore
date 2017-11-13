@@ -1,1 +1,4 @@
 parameters.yml
+.idea
+vendor
+cache
